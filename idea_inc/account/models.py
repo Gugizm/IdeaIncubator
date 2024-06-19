@@ -10,3 +10,6 @@ class CustomUser(AbstractUser):
         upload_to=profile_picture_upload_path, null=True, blank=True
     )
     skill = models.ManyToManyField(Skill, related_name="user_skill")
+
+    def __str__(self):
+        return self.username

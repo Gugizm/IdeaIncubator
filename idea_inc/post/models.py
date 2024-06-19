@@ -14,3 +14,8 @@ class Post(models.Model):
         upload_to=post_img_upload_path, null=True, blank=True
     )  # should add default photo
     skill = models.ManyToManyField(Skill, related_name="post_skill")
+    created_date = models.DateField(auto_now_add=True)
+    updated_date = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.title
