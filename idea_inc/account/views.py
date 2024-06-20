@@ -1,26 +1,13 @@
-from rest_framework import status, viewsets
-from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import permissions, viewsets
 
-from .models import CustomUser
-from .serializer import CustomUserSerializer, UserCreateSerializer
+from .models import AccountUser
+from .schema import account_list_docs
+from .serializer import AccountSerializer
 
 
-class CustomUserViewSet(APIView):
-    def get(self, request):
-        serializer = CustomUserSerializer(request.user)
-        return Response(serializer.data)
-
-
-class UserCreateAPIView(APIView):
-    permission_classes = [AllowAny]
-
-    def post(self, request):
-        serializer = UserCreateSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            return Response(
-                {"message": "User created successfully"}, status=status.HTTP_201_CREATED
-            )
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# TODO define with viewsets
+@account_list_docs
+class AccountModelViewSet(viewsets.ModelViewSet):
+    queryset = AccountUser.objects.all()
+    serializer_class = AccountSerializer
+    permission_classes = [permissions.IsAuthenticated]

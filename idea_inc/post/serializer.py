@@ -1,4 +1,3 @@
-from account.serializer import UserPublicSerializer
 from comment.serializer import CommentSerializer
 from core.models import Skill
 from core.serializer import SkillSerializer

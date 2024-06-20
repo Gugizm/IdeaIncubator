@@ -29,10 +29,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # External
     "rest_framework",
     "drf_spectacular",
-    # Internal
     "account",
     "post",
     "comment",
@@ -40,6 +38,7 @@ INSTALLED_APPS = [
     "django_filters",
     "rest_framework.authtoken",
     "core",
+    # "inc",
 ]
 
 MIDDLEWARE = [
@@ -123,7 +122,7 @@ STATIC_URL = "static/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "media/"
 
-AUTH_USER_MODEL = "account.CustomUser"
+# AUTH_USER_MODEL = "User"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -141,6 +140,7 @@ REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
